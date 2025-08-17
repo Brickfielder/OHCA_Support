@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cardiac Arrest Community Support Directory</title>
+  <meta name="description" content="This directory helps survivors, families and bystanders after an out-of-hospital cardiac arrest. Find practical, psychological and community support across the UK — and see where follow-up services are still missing." />
+  <meta name="theme-color" content="#7a0b1e" />
+  <style>
+    :root{
+      --bg:#ffffff; 
+      --surface:#f7f7f8; 
+      --text:#1b1b1f; 
+      --muted:#5a5f6a; 
+      --brand:#8c0f24; 
+      --brand-2:#b61c33; 
+      --ring:#e6ccd1; 
+      --card:#fbeaec;
+      --tint:#faf6f7;
+      --radius:18px; 
+      --shadow:0 10px 24px rgba(0,0,0,.08);
+    }
+
+    html,body{margin:0; padding:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,"Noto Sans","Apple Color Emoji","Segoe UI Emoji"; color:var(--text); background:var(--bg);} 
+
+    .container{max-width:1024px; margin:0 auto; padding:0 20px;}
+    .section{padding:56px 0}
+    .card{background:#fff; border:1px solid #ececf0; border-radius:var(--radius); box-shadow:var(--shadow)}
+    .stack{display:grid; gap:16px}
+    .grid-2{display:grid; grid-template-columns:1fr; gap:20px}
+    .grid-3{display:grid; grid-template-columns:1fr; gap:20px}
+    @media(min-width:740px){
+      .grid-2{grid-template-columns:repeat(2,1fr); align-items:stretch}
+      .grid-3{grid-template-columns:repeat(3, 1fr)}
+    }
+    .eyebrow{display:inline-flex; align-items:center; gap:8px; font-size:13px; color:var(--muted); letter-spacing:.06em; text-transform:uppercase}
+    h1{font-size:clamp(26px, 4vw, 40px); margin:0 0 16px;}
+    h2{font-size:clamp(22px, 3.5vw, 32px); margin:0 0 12px}
+    h3{font-size:20px; margin-top:0}
+    p{line-height:1.6; margin:0 0 12px}
+
+    .surface{background:var(--surface); border:1px solid #ececf0; border-radius:var(--radius)}
+    .iframe-wrap{background:#fff; border:1px dashed #cbcbd2; border-radius:var(--radius); padding:0; overflow:hidden; height:700px}
+    .iframe-wrap iframe{width:100%; height:100%; min-height:480px; border:0; display:block}
+
+    .site-shell{max-width:1200px; margin:32px auto; background:var(--card) url('https://www.transparenttextures.com/patterns/paper-fibers.png'); border:1px solid #ececf0; border-radius:28px; box-shadow:0 24px 60px rgba(0,0,0,.1); overflow:hidden; padding:20px;}
+
+    .footer{padding:36px 0 56px; border-top:1px solid #eee; color:#69707c}
+
+    .section-title-sm{font-size:clamp(18px,2.8vw,24px); margin:0 0 12px}
+
+    .hero { padding: 50px 0 20px; text-align:center; }
+    .pill{
+      display:inline-flex; align-items:center; gap:12px;
+      background:#fff; color:var(--brand); font-weight:700;
+      padding:10px 28px; border-radius:999px; margin-bottom:18px;
+      border:1px solid var(--ring); box-shadow:0 6px 16px rgba(0,0,0,.08);
+    }
+    .pill svg{ width:28px; height:28px; flex-shrink:0; }
+    .hero-title{
+      font-size:clamp(28px,4.5vw,48px); line-height:1.05; margin:8px 0 12px;
+      text-shadow:0 8px 22px rgba(0,0,0,.18);
+    }
+    .lead{ font-size:clamp(18px,2.2vw,22px); color:#33363f; max-width:78ch; margin:12px auto 22px; line-height:1.6; }
+    .cta{ display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+    .btn{display:inline-flex; align-items:center; justify-content:center; padding:12px 18px; border-radius:12px; text-decoration:none; font-weight:800; border:1px solid transparent; box-shadow:0 8px 18px rgba(0,0,0,.08);}    
+    .btn.primary{ background:var(--brand); color:#fff; }
+    .btn.primary:hover{ filter:brightness(1.05); }
+    .btn.ghost{ background:#fff; color:var(--brand); border-color:var(--ring); }
+    .btn.ghost:hover{ background:#fff; box-shadow:0 10px 22px rgba(0,0,0,.10); }
+
+    /* collapsible details */
+    details.collapse { margin:14px 0; border:1px solid #e0e0e0; border-radius:10px; padding:10px 14px; background:#fafafa; }
+    details.collapse summary { cursor:pointer; font-weight:600; margin:-10px -14px; padding:10px 14px; list-style:none; position:relative; }
+    details.collapse summary::after { content:"▶"; position:absolute; right:14px; transition:transform 0.2s; }
+    details.collapse[open] summary::after { content:"▼"; transform:rotate(0deg); }
+    details.collapse[open] { background:#fff; border-color:#ccc; }
+    .collapse-body{margin-top:10px;}
+  </style>
+</head>
+<body>
+  <div class="site-shell">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container">
+        <span class="pill">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          Survivors • Families • Bystanders
+        </span>
+        <h1 class="hero-title">Cardiac Arrest Community Support Directory</h1>
+        <p class="lead">Support after an out-of-hospital cardiac arrest should be easy to find and access. Our mission is to connect survivors, family members and bystanders with the services they need.</p>
+        <div class="cta">
+          <a class="btn primary" href="#directory">Search the directory</a>
+          <a class="btn ghost" href="#contribute">Add a service</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="section" id="about" aria-labelledby="about-title">
+      <div class="container">
+        <div class="stack">
+          <span class="eyebrow" id="about-title">Why this directory</span>
+          <p style="text-align:justify;">After an OHCA, people face medical, cognitive, psychological and practical challenges. This directory brings together clinics, charities and peer groups so survivors, families and <strong>bystanders</strong> can quickly find the right help, close to home.</p>
+        </div>
+
+        <div class="stack" style="margin-top:28px;">
+          <span class="eyebrow" id="difference-title">Are you in the right place?</span>
+          <h3>Heart Attack and Cardiac Arrest – What’s the Difference?</h3>
+          <div>
+            <p>💡♥️ A <strong>heart attack</strong> happens when blood flow to a part of the heart muscle is suddenly blocked, usually by a clot, causing chest pain or discomfort, but the heart typically keeps beating. The person remains conscious.</p>
+            <p>💡⚡ A <strong>cardiac arrest</strong> occurs when the heart suddenly stops pumping effectively, causing the person to lose consciousness and stop breathing normally. Although they're different, they're linked: a heart attack can sometimes trigger a cardiac arrest.</p>
+            <p><strong>Both require immediate medical help, but cardiac arrest needs instant CPR and defibrillation ⚡⚡ to restart the heart and save the person's life.</strong></p>
+          </div>
+        </div>
+
+        <div class="card" style="padding:24px; margin-top:24px; text-align:justify;">
+          <h3 style="display:flex; align-items:center; gap:8px; font-size:16px;">📑 Why an OHCA Follow-up and Aftercare Directory? 📖</h3>
+          <details class="collapse">
+            <summary>Survivors and Family members</summary>
+            <div class="collapse-body">
+              <p>Surviving a cardiac arrest is life-changing, and the journey doesn't end once a person leaves the hospital. Many survivors and their families face significant ongoing challenges, including persistent fatigue, memory difficulties, emotional distress, anxiety, or depression.</p>
+              <p>However, finding help can be difficult due to a lack of clear information about available services. The aim of this page is to ensure survivors and their loved ones can find and access the support they need, reducing isolation and improving recovery and quality of life.</p>
+              <p>Resuscitation Council UK (RCUK) has created Survivorship Quality Standards to make sure everyone who survives a cardiac arrest—and those who support them—gets the right help at the right time, wherever they live.</p>
+              <p>They recommend:</p>
+              <ul>
+                <li>Checks before leaving hospital for physical, memory/thinking, and emotional needs.</li>
+                <li>Clear plans and referrals to rehabilitation, psychological support, and other services.</li>
+                <li>Follow-up around 3 months after discharge for survivors and their supporters.</li>
+                <li>Support for family and friends who may also be affected.</li>
+                <li>Easy routes back into care if new problems appear later.</li>
+              </ul>
+              <p>This directory helps turn those standards into reality by showing where follow-up and aftercare are available across the UK — and where it is not yet available, it helps to highlight gaps in the service.</p>
+            </div>
+          </details>
+          <details class="collapse">
+            <summary>Bystanders/Rescuers</summary>
+            <div class="collapse-body">
+              <p>We estimate that 1–5 bystanders are involved in cardiac arrest situations on average, though many of these events go unwitnessed. Encountering such an event can be difficult and distressing, whether you are a family member or a stranger. You might feel numb, distressed, exhausted or perhaps completely fine after your experience. You may also find it difficult to think clearly.</p>
+              <p>Whatever emotions you're experiencing, there are now a handful of services that can provide a debrief, initial support, and signpost tailored to your specific needs.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- Directory Access -->
+    <section class="section surface" id="directory" aria-labelledby="directory-title">
+      <div class="container stack">
+        <div>
+          <span class="eyebrow" id="directory-title">Directory access</span>
+          <h3 style="font-size:18px;">🖱️ How can I use this map?🤔</h3>
+          <div style="text-align:justify;">
+            <p><strong>1. Explore the map</strong></p>
+            <p>You can zoom in and out, or drag the map to look around the UK—just like Google Maps.</p>
+            <p>Each icon represents either a hospital (🏥), an Air Ambulance service (🚁), or a peer support group.</p>
+            <p><strong>2. Click an icon for more info</strong></p>
+            <p>When you click a marker, a pop-up box appears with details of the service.</p>
+            <p><strong>3. Find a service by name</strong></p>
+            <p>Use the search box in the top left and type part of the name. The map will zoom to it and show its info box.</p>
+          </div>
+        </div>
+        <div>
+          <div class="iframe-wrap">
+            <iframe title="OHCA directory" src="https://brickfielder.github.io/ohca-directory/" loading="lazy"></iframe>
+          </div>
+        </div>
+
+        <div class="grid-2" style="margin-top:24px;">
+          <div class="card tinted" style="padding:24px; text-align:justify;">
+            <h3>⚠️ Disclaimer⚠️</h3>
+            <p>This is a crowd-sourced directory. All entries have been collated by information available online, contributed by survivors, clinicians, or by services themselves. While we aim to verify as many listings as possible, we cannot guarantee completeness or accuracy. Always contact the provider directly to confirm service details and eligibility.</p>
+          </div>
+
+          <div class="card tinted" style="padding:24px; text-align:justify;">
+            <h3>🌏 Can I contribute?</h3>
+            <p>Yes! Everyone is welcome to contribute. If you are a survivor/family member and you know a service not listed here, or you want to share feedback about a service, please use the links below. Clinicians can also update the details of their service via the same survey or by email. This map is a work in progress and welcomes your input.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Services -->
+    <section class="section" aria-labelledby="featured-title">
+      <div class="container stack">
+        <span class="eyebrow" id="featured-title">Quick links</span>
+        <h3 class="section-title-sm">Explore by category</h3>
+        <div class="grid-3">
+          <article class="card" style="padding:20px">
+            <h3>Hospital Clinics</h3>
+            <p>Follow-up clinics providing multidisciplinary assessment and support.</p>
+            <p><a class="btn ghost" href="#directory">View clinics</a></p>
+          </article>
+          <article class="card" style="padding:20px">
+            <h3>Charity & Community</h3>
+            <p>Practical help, grants and signposting from VCSE organisations.</p>
+            <p><a class="btn ghost" href="#directory">View charities</a></p>
+          </article>
+          <article class="card" style="padding:20px">
+            <h3>Peer Support</h3>
+            <p>Groups connecting survivors, families and bystanders to share experience.</p>
+            <p><a class="btn ghost" href="#directory">View peer groups</a></p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Get Involved -->
+    <section class="section surface" id="contribute" aria-labelledby="contribute-title">
+      <div class="container grid-2">
+        <div class="card" style="padding:22px">
+          <h3 id="contribute-title" style="margin-top:0">Are you a service provider?</h3>
+          <p>Submit your service for inclusion. We prioritise UK-based services aligned with survivorship standards.</p>
+          <p><a class="btn primary" href="PROVIDER_SUBMISSION_FORM_URL">Submit a service</a></p>
+        </div>
+        <div class="card" style="padding:22px">
+          <h3 style="margin-top:0">Are you a survivor, family member or bystander?</h3>
+          <p>Share your experience to help us improve this directory and signposting.</p>
+          <p><a class="btn ghost" href="survey.html">Give feedback</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+      <div class="container">
+        <p>© <span id="y"></span> OHCA Directory. All rights reserved.<br>
+        Improving recovery and aftercare for cardiac arrest survivors and their families.</p>
+        <p>📍 Based in [Location] | 🌐 <a href="#">Accessibility / Privacy Policy</a><br>
+        📧 Contact: <a href="mailto:ohcadirectory@gmail.com">ohcadirectory@gmail.com</a> | 📞 [phone number]</p>
+        <p>Follow us: <a href="#">LinkedIn</a> | <a href="#">Twitter/X</a> | <a href="#">Instagram</a></p>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    (function(){
+      var y = document.getElementById('y');
+      if(y){ y.textContent = new Date().getFullYear(); }
+    })();
+  </script>
+</body>
+</html>
