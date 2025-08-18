@@ -8,10 +8,10 @@
   <meta name="theme-color" content="#8c0f24" />
   <style>
     :root{
-      --bg:#ffffff;
-      --shell:#fde7ee;
-      --shell-border:#f7c9d6;
-      --surface:#ffffff;
+      --bg:#ffffff;              /* page background */
+      --shell:#fde7ee;           /* soft pink shell */
+      --shell-border:#f7c9d6;    /* pink border */
+      --surface:#ffffff;         /* inner card surface (if needed) */
       --text:#1b1b1f;
       --muted:#5a5f6a;
       --brand:#8c0f24;
@@ -24,9 +24,9 @@
       margin:0; padding:0; background:var(--bg); color:var(--text);
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
       line-height:1.5;
-      height:auto;            /* ensure document can grow */
-      overflow-y:auto;        /* allow vertical scrolling */
-      -webkit-overflow-scrolling: touch; /* smoother iOS scroll */
+      height:auto;               /* allow document growth */
+      overflow-y:auto;           /* enable vertical page scroll */
+      -webkit-overflow-scrolling: touch; /* smoother iOS scrolling */
     }
 
     .shell {
@@ -69,17 +69,16 @@
       border-bottom:2px solid rgba(140,15,36,.18); padding-bottom:2px;
     }
 
-    /* Tally container: no fixed height, no clipping */
+    /* Form container: no fixed height, no clipping */
     .form-wrap {
       background:#fff;
       border:1px solid #eee;
       border-radius:16px;
       padding:0;
-      overflow:visible;            /* allow growth; don't clip */
+      overflow:visible;                 /* don't clip the iframe */
       box-shadow: 0 6px 16px rgba(0,0,0,.06);
     }
 
-    /* Footer note */
     .note { margin-top:16px; font-size:.95rem; color:var(--muted); text-align:center; }
 
     /* Accessible focus */
@@ -106,23 +105,24 @@
     </header>
 
     <section class="form-wrap" aria-label="Update service form">
-      <!-- Tally embed with dynamic height -->
+      <!-- Plain tall iframe (no embed.js). Page scrolls normally. -->
       <iframe
-        data-tally-src="https://tally.so/r/wko7Mo?hideTitle=1&transparentBackground=1&dynamicHeight=1"
+        src="https://tally.so/embed/wko7Mo?hideTitle=1&transparentBackground=1"
         title="Update Service Form"
         width="100%"
-        height="900"           <!-- initial fallback; will be auto-resized -->
+        height="2200"                 <!-- generous height to cover whole form -->
         frameborder="0"
-        marginheight="0"
-        marginwidth="0"
-        loading="lazy">
+        scrolling="yes"
+        loading="lazy"
+        style="display:block;border:0;width:100%;min-height:1200px;">
       </iframe>
     </section>
 
-    <p class="note">Having trouble viewing the form? <a href="https://tally.so/r/wko7Mo" target="_blank" rel="noopener">Open it in a new tab</a>.</p>
+    <p class="note">
+      Having trouble viewing the form?
+      <a href="https://tally.so/r/wko7Mo" target="_blank" rel="noopener">Open it in a new tab</a>.
+    </p>
   </main>
-
-  <!-- Tally auto-resize script (must be present for dynamicHeight) -->
-  <script async src="https://tally.so/widgets/embed.js"></script>
 </body>
 </html>
+
