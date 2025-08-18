@@ -8,10 +8,10 @@
   <meta name="theme-color" content="#8c0f24" />
   <style>
     :root{
-      --bg:#ffffff;              /* page background */
-      --shell:#fde7ee;           /* soft pink shell */
-      --shell-border:#f7c9d6;    /* pink border */
-      --surface:#ffffff;         /* inner card surface (if needed) */
+      --bg:#ffffff;
+      --shell:#fde7ee;
+      --shell-border:#f7c9d6;
+      --surface:#ffffff;
       --text:#1b1b1f;
       --muted:#5a5f6a;
       --brand:#8c0f24;
@@ -20,7 +20,14 @@
       --shadow:0 10px 28px rgba(0,0,0,.10);
     }
 
-    html, body { margin:0; padding:0; background:var(--bg); color:var(--text); font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif; line-height:1.5;}
+    html, body {
+      margin:0; padding:0; background:var(--bg); color:var(--text);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+      line-height:1.5;
+      height:auto;            /* ensure document can grow */
+      overflow-y:auto;        /* allow vertical scrolling */
+      -webkit-overflow-scrolling: touch; /* smoother iOS scroll */
+    }
 
     .shell {
       max-width: 920px;
@@ -44,10 +51,7 @@
       font-size:1rem;
     }
 
-    header {
-      text-align:center;
-      margin-bottom: 18px;
-    }
+    header { text-align:center; margin-bottom: 18px; }
 
     h1 {
       margin: 12px 0 8px;
@@ -56,46 +60,29 @@
       letter-spacing:.2px;
     }
 
-    p.lead {
-      margin: 8px auto 18px;
-      max-width: 60ch;
-      color: var(--muted);
-    }
+    p.lead { margin: 8px auto 18px; max-width: 60ch; color: var(--muted); }
 
-    .cta-bar {
-      display:flex;
-      justify-content:center;
-      margin: 14px 0 24px;
-    }
+    .cta-bar { display:flex; justify-content:center; margin: 14px 0 24px; }
 
     .link-home {
-      display:inline-block;
-      text-decoration:none;
-      color:var(--brand);
-      font-weight:600;
-      border-bottom:2px solid rgba(140,15,36,.18);
-      padding-bottom:2px;
+      display:inline-block; text-decoration:none; color:var(--brand); font-weight:600;
+      border-bottom:2px solid rgba(140,15,36,.18); padding-bottom:2px;
     }
 
-    /* Tally container */
+    /* Tally container: no fixed height, no clipping */
     .form-wrap {
       background:#fff;
       border:1px solid #eee;
       border-radius:16px;
-      padding: 0;
-      overflow:hidden;
+      padding:0;
+      overflow:visible;            /* allow growth; don't clip */
       box-shadow: 0 6px 16px rgba(0,0,0,.06);
     }
 
     /* Footer note */
-    .note {
-      margin-top:16px;
-      font-size:.95rem;
-      color:var(--muted);
-      text-align:center;
-    }
+    .note { margin-top:16px; font-size:.95rem; color:var(--muted); text-align:center; }
 
-    /* Improves focus styles for accessibility */
+    /* Accessible focus */
     a:focus, button:focus, .link-home:focus, .badge:focus {
       outline: 3px solid var(--ring);
       outline-offset: 2px;
@@ -106,39 +93,36 @@
 <body>
   <main class="shell">
     <header>
-      <span class="badge" aria-label="Form type">
-        📂 Provider Update Form
-      </span>
+      <span class="badge" aria-label="Form type">📂 Provider Update Form</span>
       <h1>Flag or update your service</h1>
       <p class="lead">
         Health-care professionals: use this form to add a new service or update details for the
         OHCA Support Directory. Submissions help ensure people affected by out-of-hospital cardiac
         arrest can find accurate, up-to-date support.
       </p>
-      <!-- Optional: link back to your main page or survey page -->
       <div class="cta-bar">
         <a class="link-home" href="./index.html" aria-label="Back to home">← Back to Home</a>
       </div>
     </header>
 
     <section class="form-wrap" aria-label="Update service form">
-      <!-- Tally embed -->
+      <!-- Tally embed with dynamic height -->
       <iframe
         data-tally-src="https://tally.so/r/wko7Mo?hideTitle=1&transparentBackground=1&dynamicHeight=1"
+        title="Update Service Form"
         width="100%"
-        height="800"
+        height="900"           <!-- initial fallback; will be auto-resized -->
         frameborder="0"
         marginheight="0"
         marginwidth="0"
-        title="Update Service Form"
-        loading="lazy"
-        ></iframe>
+        loading="lazy">
+      </iframe>
     </section>
 
     <p class="note">Having trouble viewing the form? <a href="https://tally.so/r/wko7Mo" target="_blank" rel="noopener">Open it in a new tab</a>.</p>
   </main>
 
-  <!-- Tally auto-resize script -->
-  <script src="https://tally.so/widgets/embed.js" defer></script>
+  <!-- Tally auto-resize script (must be present for dynamicHeight) -->
+  <script async src="https://tally.so/widgets/embed.js"></script>
 </body>
 </html>
