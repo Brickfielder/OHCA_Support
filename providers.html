@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Provider Repository – Sign in</title>
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    :root {
+      --shell:#fde7ee; /* soft pink */
+      --shell-border:#f7c9d6;
+      --text:#1a1a1a;
+      --muted:#666;
+      --accent:#111;
+      --radius:24px;
+    }
+    * { box-sizing:border-box; }
+    body {
+      margin:0; background:#fff; color:var(--text);
+      font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+    }
+    .wrap {
+      min-height:100svh; display:grid; place-items:center; padding:28px;
+      background:#fff;
+    }
+    .card {
+      width:min(980px,100%);
+      background:var(--shell);
+      border:1px solid var(--shell-border);
+      border-radius:var(--radius);
+      box-shadow:0 10px 28px rgba(0,0,0,.08);
+      padding:28px;
+      position:relative;
+      overflow:hidden;
+      isolation:isolate;
+    }
+    /* subtle paper grain */
+    .card::before {
+      content:""; position:absolute; inset:0; z-index:-1; opacity:.15;
+      background-image:
+        radial-gradient(#fff 1px, transparent 1px),
+        radial-gradient(#fff 1px, transparent 1px);
+      background-size:12px 12px, 18px 18px;
+      background-position:0 0, 6px 9px;
+      mix-blend-mode:overlay;
+      pointer-events:none;
+    }
+    header h1 { margin:0; font-size:clamp(22px,3.5vw,32px); }
+    header p { margin:.25rem 0 1.25rem; color:var(--muted); }
+    .pill {
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px; border-radius:999px;
+      background:#fff; border:1px solid #eee;
+      font-weight:600; margin:.25rem 0 1rem;
+    }
+    form { display:flex; gap:12px; flex-wrap:wrap; margin-top:.25rem; }
+    input[type=password]{
+      flex:1 1 260px; font-size:16px; padding:12px 14px;
+      border-radius:12px; border:1px solid #ddd; background:#fff;
+    }
+    button{
+      padding:12px 16px; border-radius:12px; border:0; cursor:pointer;
+      background:var(--accent); color:#fff; font-weight:600;
+    }
+    .error{ color:#b00020; margin-top:8px; min-height:1.2em; }
+    #content { display:none; margin-top:14px; }
+    hr { border:0; border-top:1px solid rgba(0,0,0,.08); margin:16px 0; }
+    footer { color:#777; font-size:14px; margin-top:10px; }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="card" aria-live="polite">
+      <header>
+        <div class="pill" title="Restricted area">🔒 Providers’ area</div>
+        <h1>Provider Repository</h1>
+        <p>Enter the shared password to view questionnaires & SOPs.</p>
+      </header>
+
+      <form id="gate" autocomplete="off">
+        <input id="pw" type="password" placeholder="Password" inputmode="text" />
+        <button type="submit">Unlock</button>
+        <div id="msg" class="error"></div>
+      </form>
+
+      <div id="content" aria-hidden="true"></div>
+
+      <footer>
+        Having trouble? Contact Marco. Please don’t redistribute links or files.
+      </footer>
+    </section>
+  </main>
+
+  <script>
+    // ===== Configure your password (SHA-256 hex) and content file =====
+    const PASSWORD_HASH_HEX = "f1f9d1eb0dae8f448d1ec172ce6786c7fe0ebf43501f5468c87da2a05c0f3709"; // CHANGE ME
+    const CONTENT_URL = "providers-content.html"; // your protected content
+    const KEY = "providersUnlocked_v1";
+
+    async function sha256Hex(text) {
+      const bytes = new TextEncoder().encode(text);
+      const digest = await crypto.subtle.digest("SHA-256", bytes);
+      return Array.from(new Uint8Array(digest)).map(b=>b.toString(16).padStart(2,"0")).join("");
+    }
+    function show(html){
+      const box = document.getElementById("content");
+      box.innerHTML = html;
+      box.style.display = "block";
+      box.setAttribute("aria-hidden","false");
+      document.getElementById("gate").style.display = "none";
+    }
+    async function loadContent(){
+      const res = await fetch(CONTENT_URL, { cache:"no-store" });
+      if(!res.ok) throw new Error("Could not load content.");
+      const html = await res.text();
+      show(html);
+      // focus main content for accessibility
+      box?.querySelector("h2, h1, a, p")?.focus?.();
+    }
+    async function tryAuto(){
+      if(sessionStorage.getItem(KEY)==="1"){
+        try { await loadContent(); } catch(e){}
+      }
+    }
+    document.getElementById("gate").addEventListener("submit", async (e)=>{
+      e.preventDefault();
+      const pw = (document.getElementById("pw").value || "").trim();
+      const msg = document.getElementById("msg");
+      msg.textContent = "";
+      try{
+        const hex = await sha256Hex(pw);
+        if(hex === PASSWORD_HASH_HEX){
+          sessionStorage.setItem(KEY, "1");
+          await loadContent();
+        } else {
+          msg.textContent = "Incorrect password.";
+        }
+      }catch(err){
+        msg.textContent = "Something went wrong. Please try again.";
+      }
+    });
+    tryAuto();
+  </script>
+</body>
+</html>
